@@ -1,38 +1,247 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --main-color: #ffa800;
+  --font-family: "IBM Plex Sans", sans-serif;
+  --bg: #ffffff;
+}
+.brand {
+  font-size: 2rem;
+  font-weight: 700;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar-brand {
+  font-family: var(--font-family);
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.navbar-light .navbar-brand {
+  color: var(--main-color);
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.navbar-light .navbar-brand:hover {
+  color: var(--main-color);
+}
+.navbar-light {
+  background-color: var(--bg);
+}
+.navbar-light .navbar-nav .nav-link {
+  background-color: var(--bg);
+  color: #48556c;
+  font-family: var(--font-family);
+  font-weight: 700;
+  margin-left: 15px;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover {
+  color: var(--main-color);
+}
+.twitter-btn {
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.twitter-btn:hover {
+  color: white;
+}
+.navbar-toggler {
+  background-color: var(--main-color);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.navbar-light .navbar-toggler {
+  color: var(--main-color);
+}
+
+.banner-title {
+  color: #172b4c;
+  font-family: "Rubik";
+  font-size: 54px;
+  font-weight: 600;
+  line-height: 80px;
+}
+.banner-para {
+  color: var(--main-color);
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 24px;
+  font-weight: 200;
+}
+.title-padding {
+  padding-left: 10px;
+}
+.coin-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: rgb(23, 4376);
+}
+.dogge-currency {
+  font-size: 14px;
+  color: rgb(120, 123, 134);
+}
+.card-desc {
+  font-size: 28px;
+  font-weight: 700;
+  color: rgb(23, 43, 76);
+}
+.coin-time {
+  color: rgb(255, 168, 0);
+}
+.card {
+  background-color: var(--bg);
+  border: 1px solid #fafaf6;
+  font-family: "Roboto", sans-serif;
+  margin: auto;
+  width: auto;
+}
+.card:hover {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.pull-up {
+  transition: all 0.3s ease-in;
+}
+.mt-5 {
+  margin-top: 3rem !important;
+}
+.market {
+  width: 100%;
+  background: url("https://luvfinder.luvinu.io/static/media/back-texture.50ab4ad34334a7b43d22.jpg");
+}
+.market-title {
+  color: rgb(255, 168, 0);
+}
+.market-text {
+  font-size: 32px;
+  font-weight: 700;
+  color: rgb(23, 43, 76);
+}
+.market-para {
+  font-size: 14px;
+  color: rgb(120, 123, 134);
+}
+.price-section {
+  padding-top: 40px;
+  padding-bottom: 50px;
+}
+
+.place-style {
+  padding-left: 10px;
+  text-align: left;
+}
+.company-name {
+  font-weight: 700;
+  font-size: 1rem;
+}
+.coin-price {
+  font-size: 14px;
+  color: rgb(120, 123, 134);
+}
+.current-price {
+  font-size: 25px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.profit {
+  font-size: 22px;
+}
+
+.filter .dropdown a {
+  font-size: 1rem;
+  color: #172b4c;
+  font-weight: 700;
+  font-family: var(--font-family);
+}
+
+.filter .dropdown a:hover {
+  color: var(--main-color);
+}
+.filter .dropdown-menu a {
+  font-size: 1rem;
+  color: rgb(120, 123, 134);
+}
+table .heading {
+  color: #2f415e;
+  font-size: 1rem;
+  font-family: var(--font-family);
+  font-weight: 700;
+  border-top: 1px solid #e0e4e7;
+  border-bottom: 2px solid #e2e6e9;
+}
+
+td span {
+  color: #2f415e;
+  font-family: var(--font-family);
+  margin-bottom: 24px;
+}
+.image-circle {
+  margin-right: 10px;
+}
+th td span {
+  color: #172b4c;
+  font-family: var(--font-family);
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+}
+footer .navbar-nav .nav-item a {
+  width: 10vw;
+  font-family: var(--font-family);
+  font-weight: 700;
+}
+footer .navbar-nav {
+  background-color: var(--main-color);
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+.table-section {
+  overflow-y: auto;
+}
+
+@media screen and (min-width: 786px) and (max-width: 992px) {
+  .banner-title {
+    font-size: 45px;
+    line-height: 55px;
   }
-  to {
-    transform: rotate(360deg);
+  .banner-para {
+    font-size: 20px;
+  }
+  .graph {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 586px) and(max-width: 786px) {
+  .banner-title {
+    font-size: 30px;
+    line-height: 55px;
+  }
+  .banner-para {
+    font-size: 20px;
+  }
+  .graph {
+    width: 100%;
+  }
+  footer .navbar-nav {
+    background-color: var(--main-color);
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+  }
+}
+@media screen and (max-width: 586px) {
+  .banner-title {
+    font-size: 35px;
+    line-height: 45px;
+  }
+  .graph {
+    width: 100%;
+  }
+  .table {
+    width: 90vw;
   }
 }
