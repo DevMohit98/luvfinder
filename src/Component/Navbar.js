@@ -1,6 +1,7 @@
 import React from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
+import { useGLobalContext } from "./Context";
 const Navbar = () => {
   const Styles = {
     backgroundColor: "rgb(255, 179, 31)",
@@ -17,7 +18,7 @@ const Navbar = () => {
     width: "120px",
     marginBottom: "10px",
   };
-
+  const { currency, BitCoin, HandleClick, HandleBitCoin } = useGLobalContext();
   return (
     <section className="p-4 m-4">
       <nav className="navbar fixed-top navbar-expand-lg navbar-light p-4">
@@ -58,51 +59,51 @@ const Navbar = () => {
                   aria-expanded="false"
                   style={Styles}
                 >
-                  USD
+                  {currency}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleClick}>
                       USD
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleClick}>
                       INR
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleClick}>
                       JPY
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleClick}>
                       EUR
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#" onClick={HandleClick}>
                       RUB
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleClick}>
                       CAKE
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
-                      BTS
+                    <a class="dropdown-item" href="#" onClick={HandleClick}>
+                      BTC
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleClick}>
                       BNB
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleClick}>
                       ETH
                     </a>
                   </li>
@@ -118,56 +119,56 @@ const Navbar = () => {
                   aria-expanded="false"
                   style={Styles}
                 >
-                  DOBO
+                  {BitCoin}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                       DOGE
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                       SHIB
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                       MIM
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                       SPELL
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                       BABYDOGE
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                       ELON
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                       SAMO
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                       CATE
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                       HOGE
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                       DOBO
                     </a>
                   </li>

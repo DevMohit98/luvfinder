@@ -4,19 +4,32 @@ import dogge from "../Assests/dogge.png";
 import graph from "../Assests/graph.png";
 import place from "../Assests/place.png";
 import tableimage from "../Assests/tableimage.png";
+import { useGLobalContext } from "./Context";
+import Loading from "./Loading";
 const Home = () => {
   const Style = {
     width: "100%",
   };
   const Styles = {
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     color: "#172b4c",
     borderRadius: "5px",
     minWidth: "80px",
     marginBottom: "10px",
     marginTop: "5px",
+    fontFamily: "IBM Plex Sans",
+    fontWeight: "700",
   };
-
+  const {
+    currency,
+    BitCoin,
+    HandleClick,
+    HandleBitCoin,
+    info,
+    mydata,
+    sortedInfo,
+    sign,
+  } = useGLobalContext();
   return (
     <>
       {/*banner section */}
@@ -42,7 +55,7 @@ const Home = () => {
             >
               <img
                 src="https://luvfinder.luvinu.io/static/media/min.31434c0936590ed1d3e0.png"
-                width="100%"
+                style={{ width: "100%" }}
                 alt="banner"
               ></img>
             </div>
@@ -55,129 +68,162 @@ const Home = () => {
           <div className="row" data-aos="fade-up">
             <div className="col-lg-2 col-md-6 col-sm-6 col-12">
               <div className="card pull-up mt-5" style={Style}>
-                <div className="card-body ">
-                  <h5 className="card-title d-flex">
-                    <img
-                      src={dogge}
-                      alt="dogge"
-                      width="30px"
-                      height="30px"
-                    ></img>
-                    <div className="title-padding">
-                      <div className="coin-title">DOGGE/USD</div>{" "}
-                      <div className="dogge-currency">Dogecoin/U.S. Dollar</div>
+                {info.map((items) => {
+                  const { previousdata, index } = items;
+                  return (
+                    <div className="card-body" key={index}>
+                      <h5 className="card-title d-flex">
+                        <img
+                          src={dogge}
+                          alt="dogge"
+                          width="30px"
+                          height="30px"
+                        ></img>
+                        <div className="title-padding">
+                          <div className="coin-title">{`${BitCoin}/${currency}`}</div>
+                          <div className="dogge-currency">{`${BitCoin}/${currency}`}</div>
+                        </div>
+                      </h5>
+                      <h4 className="card-text card-desc">
+                        {previousdata.last5Mins} %
+                      </h4>
+                      <h6 className="coin-time">Last 5 mins</h6>
+                      <div className="card-text">
+                        <img
+                          src={graph}
+                          alt="graph"
+                          height="30px"
+                          width="150px"
+                          className="graph"
+                        ></img>
+                      </div>
                     </div>
-                  </h5>
-                  <h4 className="card-text card-desc">0.81%</h4>
-                  <h6 className="coin-time">Last 5 mins</h6>
-                  <div className="card-text">
-                    <img
-                      src={graph}
-                      alt="graph"
-                      height="30px"
-                      width="150px"
-                      className="graph"
-                    ></img>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
             <div className="col-lg-2 col-md-6 col-sm-6 col-12">
               <div className="card pull-up mt-5" style={Style}>
-                <div className="card-body">
-                  <h5 className="card-title d-flex">
-                    <img
-                      src={dogge}
-                      alt="dogge"
-                      width="30px"
-                      height="30px"
-                    ></img>
-                    <div className="title-padding">
-                      <div className="coin-title">DOGGE/USD</div>
-                      <div className="dogge-currency">Dogecoin/U.S. Dollar</div>
+                {info.map((items) => {
+                  const { previousdata, index } = items;
+                  return (
+                    <div className="card-body" key={index}>
+                      <h5 className="card-title d-flex">
+                        <img
+                          src={dogge}
+                          alt="dogge"
+                          width="30px"
+                          height="30px"
+                        ></img>
+                        <div className="title-padding">
+                          <div className="coin-title">{`${BitCoin}/${currency}`}</div>
+                          <div className="dogge-currency">{`${BitCoin}/${currency}`}</div>
+                        </div>
+                      </h5>
+                      <h4 className="card-text card-desc">
+                        {previousdata.last1Hour} %
+                      </h4>
+                      <h6 className="coin-time">Last 1 hours</h6>
+                      <div className="card-text">
+                        <img
+                          src={graph}
+                          alt="graph"
+                          height="30px"
+                          width="150px"
+                          className="graph"
+                        ></img>
+                      </div>
                     </div>
-                  </h5>
-                  <h4 className="card-text card-desc">0.36 %</h4>
-                  <h6 className="coin-time">Last 1 hours</h6>
-                  <div className="card-text">
-                    <img
-                      src={graph}
-                      alt="graph"
-                      height="30px"
-                      width="150px"
-                      className="graph"
-                    ></img>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
             <div className="col-lg-3 col-md-12 col-xs-12 m-auto">
               <div className="card pull-up mt-5 text-center market">
-                <div className="card-body">
-                  <h3 className="market-title">Best Price to trade</h3>
-                  <h4 className="card-text market-text">0.13738152 %</h4>
-                  <div className="market-para">
-                    Average Doge / USD net price including commission
-                  </div>
-                </div>
+                {info.map((items) => {
+                  const { previousdata, index } = items;
+                  return (
+                    <div className="card-body" key={index}>
+                      <h3 className="market-title">Best Price to trade</h3>
+                      <h4 className="card-text market-text">{`${previousdata.avg_trage} %`}</h4>
+                      <div className="market-para">
+                        {`Average ${BitCoin} / ${currency} net price including commission`}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div className="col-lg-2 col-md-6 col-sm-6 col-12">
               <div className="card pull-up mt-5" style={Style}>
-                <div className="card-body">
-                  <h5 className="card-title d-flex">
-                    <img
-                      src={dogge}
-                      alt="dogge"
-                      width="30px"
-                      height="30px"
-                    ></img>
-                    <div className="title-padding">
-                      <div className="coin-title">DOGGE/USD</div>
-                      <div className="dogge-currency">Dogecoin/U.S. Dollar</div>
+                {info.map((items) => {
+                  const { previousdata, index } = items;
+                  return (
+                    <div className="card-body" key={index}>
+                      <h5 className="card-title d-flex">
+                        <img
+                          src={dogge}
+                          alt="dogge"
+                          width="30px"
+                          height="30px"
+                        ></img>
+                        <div className="title-padding">
+                          <div className="coin-title">{`${BitCoin}/${currency}`}</div>
+                          <div className="dogge-currency">{`${BitCoin}/${currency}`}</div>
+                        </div>
+                      </h5>
+                      <h4 className="card-text card-desc">
+                        {previousdata.last24Hours} %
+                      </h4>
+                      <h6 className="coin-time">Last 1 day</h6>
+                      <div className="card-text">
+                        <img
+                          src={graph}
+                          alt="graph"
+                          height="30px"
+                          width="150px"
+                          className="graph"
+                        ></img>
+                      </div>
                     </div>
-                  </h5>
-                  <h4 className="card-text card-desc">6.35 %</h4>
-                  <h6 className="coin-time">Last 1 day</h6>
-                  <div className="card-text">
-                    <img
-                      src={graph}
-                      alt="graph"
-                      height="30px"
-                      width="150px"
-                      className="graph"
-                    ></img>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
             <div className="col-lg-2 col-md-6 col-sm-6 col-12">
               <div className="card pull-up mt-5" style={Style}>
-                <div className="card-body">
-                  <h5 className="card-title d-flex">
-                    <img
-                      src={dogge}
-                      alt="dogge"
-                      width="30px"
-                      height="30px"
-                    ></img>
-                    <div className="title-padding">
-                      <div className="coin-title">DOGGE/USD</div>
-                      <div className="dogge-currency">Dogecoin/U.S. Dollar</div>
+                {info.map((items) => {
+                  const { previousdata, index } = items;
+                  return (
+                    <div className="card-body" key={index}>
+                      <h5 className="card-title d-flex">
+                        <img
+                          src={dogge}
+                          alt="dogge"
+                          width="30px"
+                          height="30px"
+                        ></img>
+                        <div className="title-padding">
+                          <div className="coin-title">{`${BitCoin}/${currency}`}</div>
+                          <div className="dogge-currency">{`${BitCoin}/${currency}`}</div>
+                        </div>
+                      </h5>
+                      <h4 className="card-text card-desc">
+                        {previousdata.last7Days} %
+                      </h4>
+                      <h6 className="coin-time">Last 7 days</h6>
+                      <div className="card-text">
+                        <img
+                          src={graph}
+                          alt="graph"
+                          height="30px"
+                          width="150px"
+                          className="graph"
+                        ></img>
+                      </div>
                     </div>
-                  </h5>
-                  <h4 className="card-text card-desc">15.19 %</h4>
-                  <h6 className="coin-time">Last 7 days</h6>
-                  <div className="card-text">
-                    <img
-                      src={graph}
-                      alt="graph"
-                      height="30px"
-                      width="150px"
-                      className="graph"
-                    ></img>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -199,11 +245,17 @@ const Home = () => {
                       height="30px"
                     ></img>
                     <div className="place-style">
-                      <div className="company-name">OKcoin</div>
-                      <div className="coin-price">Dogecoin / U.S. Dollar</div>
+                      <div className="company-name">{mydata.Company}</div>
+                      <div className="coin-price">{`${BitCoin}/${currency}`}</div>
                     </div>
                   </h5>
-                  <h4 className="card-text current-price"> $0.1439</h4>
+                  {sign.map((items) => {
+                    return (
+                      <>
+                        <h4 className="card-text current-price">{`${items.symbol} ${mydata.place2Sell}`}</h4>
+                      </>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -219,11 +271,19 @@ const Home = () => {
                       height="30px"
                     ></img>
                     <div className="place-style">
-                      <div className="company-name">Bittrex</div>
-                      <div className="coin-price">Dogecoin / U.S. Dollar</div>
+                      <div className="company-name">{mydata.PurchaseAt}</div>
+                      <div className="coin-price">{`${BitCoin}/${currency}`}</div>
                     </div>
                   </h5>
-                  <h4 className="card-text current-price"> $0.00000343</h4>
+                  {sign.map((items) => {
+                    return (
+                      <>
+                        <h4 className="card-text current-price">
+                          {`${items.symbol} ${mydata.place2Purchase}`}
+                        </h4>
+                      </>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -231,7 +291,7 @@ const Home = () => {
               <div className="card pull-up mt-5 card-width">
                 <div className="card-body">
                   <h3 className="market-title profit">
-                    The profit you earn at 1 DOGE Coin
+                    {`The profit you earn at 1 ${BitCoin} Coin`}
                   </h3>
                   <h5 className="card-title d-flex">
                     <img
@@ -241,11 +301,21 @@ const Home = () => {
                       height="30px"
                     ></img>
                     <div className="place-style">
-                      <div className="company-name">DOGE/USD</div>
-                      <div className="coin-price">Dogecoin / U.S. Dollar</div>
+                      <div className="company-name">{`${BitCoin}/${currency}`}</div>
+                      <div className="coin-price">{`${BitCoin}/${currency}`}</div>
                     </div>
                   </h5>
-                  <h4 className="card-text current-price">$ 0.14290957</h4>
+                  {sign.map((items) => {
+                    return (
+                      <>
+                        <h4 className="card-text current-price">
+                          <h4 className="card-text current-price">
+                            {`${items.symbol} ${mydata.averageTarde}`}
+                          </h4>
+                        </h4>
+                      </>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -253,61 +323,62 @@ const Home = () => {
         </div>
       </section>
       {/*filter section */}
-      <section className="p-2 m-2 filter d-flex">
+      <section className="p-2 m-2 filter d-flex" data-aos="fade-up">
         <div class="nav-item dropdown">
           <a
-            class="nav-link dropdown-toggle"
+            className="nav-link dropdown-toggle"
             href="#"
             id="navbarDropdown"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            style={{ display: "inline-block" }}
           >
-            USD
+            {currency}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleClick}>
                 USD
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleClick}>
                 INR
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleClick}>
                 JPY
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleClick}>
                 EUR
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleClick}>
                 RUB
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleClick}>
                 CAKE
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleClick}>
                 BTC
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleClick}>
                 BNB
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleClick}>
                 ETH
               </a>
             </li>
@@ -321,58 +392,59 @@ const Home = () => {
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            style={{ display: "inline-block" }}
           >
-            DOGE
+            {BitCoin}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                 DOGE
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                 SHIB
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                 MIM
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                 SPELL
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                 BABYDOGE
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                 ELON
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                 SAMO
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                 CATE
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                 HOGE
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
-                HOGE
+              <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
+                DOBO
               </a>
             </li>
           </ul>
@@ -390,602 +462,188 @@ const Home = () => {
               <th scope="col">Volume</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <span style={{ display: "inline" }}>2,205,690.5</span>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">5</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">6</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">8</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">9</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">10</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">11</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">12</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">13</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">14</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">15</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">16</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">17</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">18</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">19</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">20</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">21</th>
-              <td className="d-flex align-items-left justify-content-start">
-                <img
-                  className="image-circle"
-                  src={tableimage}
-                  alt="logo"
-                  width="18px"
-                  height="23px"
-                ></img>
-                <span style={{ fontWeight: 600 }}>KuCoin</span>
-              </td>
-              <td>
-                <span style={{ fontWeight: "600", marginRight: "5px" }}>$</span>
-                <span>0.000045</span>
-              </td>
-              <td>0.087412 %</td>
-              <td>
-                <span style={{ fontWeigt: "600", marginRight: "5px" }}>$</span>
-                <div style={{ display: "inline" }}>2,205,690.5</div>
-              </td>
-            </tr>
+          <tbody data-aos="fade-up">
+            {sortedInfo.map((items, index) => {
+              const { name, last_trade_price, bid_percentage, volume } = items;
+              return (
+                <tr>
+                  <th scope="row">{index + 1}</th>
+                  <td className="d-flex align-items-left justify-content-start">
+                    <img
+                      className="image-circle"
+                      src={tableimage}
+                      alt="logo"
+                      width="18px"
+                      height="23px"
+                    ></img>
+                    <span style={{ fontWeight: 600 }}>{name}</span>
+                  </td>
+                  <td>
+                    {sign.map((items) => {
+                      return (
+                        <>
+                          <span
+                            style={{ fontWeight: "600", marginRight: "5px" }}
+                          >
+                            {items.symbol}
+                          </span>
+                        </>
+                      );
+                    })}
+
+                    <span>{last_trade_price}</span>
+                  </td>
+                  <td>{bid_percentage}</td>
+                  <td>
+                    {sign.map((items) => {
+                      return (
+                        <>
+                          <span
+                            style={{ fontWeight: "600", marginRight: "5px" }}
+                          >
+                            {items.symbol}
+                          </span>
+                        </>
+                      );
+                    })}
+                    <div style={{ display: "inline" }}>{volume}</div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </section>
       {/*footer section */}
-      <footer className="footer">
-        <ul className="navbar-nav">
-          <li class="nav-item dropdown">
-            <a
-              className="nav-link dropdown-toggle text-center"
-              href="#"
-              id="navbarDropdown"
-              role="button"
+      <div className="footer fixed-bottom">
+        <div className="d-flex justify-content-around align-items-center flex-row">
+          <div className="dropdown mt-2 ">
+            <button
+              className="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
               data-bs-toggle="dropdown"
               aria-expanded="false"
               style={Styles}
             >
-              USD
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {currency}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="#" onClick={HandleClick}>
                   USD
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="#" onClick={HandleClick}>
                   INR
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="#" onClick={HandleClick}>
                   JPY
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="#" onClick={HandleClick}>
                   EUR
                 </a>
               </li>
               <li>
-                <a className="dropdown-item" href="#">
+                <a class="dropdown-item" href="#" onClick={HandleClick}>
                   RUB
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="#" onClick={HandleClick}>
                   CAKE
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="#">
-                  BTS
+                <a class="dropdown-item" href="#" onClick={HandleClick}>
+                  BTC
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="#" onClick={HandleClick}>
                   BNB
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="#" onClick={HandleClick}>
                   ETH
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              className="nav-link dropdown-toggle text-center "
-              href="#"
-              id="navbarDropdown"
-              role="button"
+          </div>
+          <div className="dropdown mt-2 ">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
               data-bs-toggle="dropdown"
               aria-expanded="false"
               style={Styles}
             >
-              DOBO
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {BitCoin}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                   DOGE
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="#">
-                  SHIB
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  MIM
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  SPELL
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  BABYDOGE
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  ELON
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  SAMO
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  CATE
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
                   HOGE
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="#">
-                  DOBO
+                <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
+                  CATE
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
+                  SAMO
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
+                  ELON
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
+                  BABYDOGE
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
+                  SPELL
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
+                  MIM
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" onClick={HandleBitCoin}>
+                  DOGE
                 </a>
               </li>
             </ul>
-          </li>
-        </ul>
-      </footer>
+          </div>
+          <div className="tele d-flex justify-content-end">
+            <div className="footer-twitter-btn">
+              <a href="https://t.me/Luvfindingbot" alt="telegram">
+                <i class="fa-brands fa-telegram fa-3x"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
